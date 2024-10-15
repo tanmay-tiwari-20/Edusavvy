@@ -1,45 +1,80 @@
+import { useState, useEffect } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Effect to add or remove the 'dark' class to the HTML root element
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <nav className="bg-white px-6 py-4 flex items-center justify-between shadow-md">
+    <nav className=" px-9 py-5 flex items-center justify-between">
       {/* Logo */}
-      <div className="text-2xl font-bold text-blue-600">edusavvy</div>
+      <h1 className="leckerli-one-regular text-[5vh] font-bold text-[#0078D7] drop-shadow-2xl cursor-pointer">
+        edusavvy
+      </h1>
 
       {/* Navigation Links */}
-      <div className="hidden md:flex space-x-6 text-gray-800">
-        <a href="#" className="hover:text-blue-600 transition">
+      <div className="hidden md:flex gap-14 font-semibold">
+        <Link
+          to="/"
+          className="hover:text-[#0078D7] allerta-regular transition"
+        >
           Home
-        </a>
-        <a href="#" className="hover:text-blue-600 transition">
+        </Link>
+        <Link
+          to="/courses"
+          className="hover:text-[#0078D7] allerta-regular transition"
+        >
           Courses
-        </a>
-        <a href="#" className="hover:text-blue-600 transition">
+        </Link>
+        <Link
+          to="/feed"
+          className="hover:text-[#0078D7] allerta-regular transition"
+        >
           Feed
-        </a>
-        <a href="#" className="hover:text-blue-600 transition">
+        </Link>
+        <Link
+          to="/buy-sell"
+          className="hover:text-[#0078D7] allerta-regular transition"
+        >
           Buy & Sell
-        </a>
-        <a href="#" className="hover:text-blue-600 transition">
+        </Link>
+        <Link
+          to="/contact"
+          className="hover:text-[#0078D7] allerta-regular transition"
+        >
           Contact Us
-        </a>
+        </Link>
       </div>
 
       {/* Theme Toggle and Dashboard Button */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center gap-4">
         {/* Theme Toggle */}
-        <button className="text-black hover:text-blue-600 focus:outline-none">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            className="w-5 h-5"
-          >
-            <path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 010 1.42L2.81 7.05a1 1 0 11-1.42-1.42l1.41-1.41a1 1 0 011.42 0zM2 12a1 1 0 011-1h2a1 1 0 110 2H3a1 1 0 01-1-1zm17.78-7.78a1 1 0 010 1.42l-1.41 1.41a1 1 0 01-1.42-1.42l1.41-1.41a1 1 0 011.42 0zM12 20a1 1 0 011-1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm7.78-5.78a1 1 0 000 1.42l1.41 1.41a1 1 0 101.42-1.42l-1.41-1.41a1 1 0 00-1.42 0zM21 11h-2a1 1 0 100 2h2a1 1 0 000-2zm-7.07 5.07a1 1 0 01-1.41 0l-1.41-1.41a1 1 0 111.41-1.41l1.41 1.41a1 1 0 010 1.41z" />
-          </svg>
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-full transition-colors duration-300 focus:outline-none text-xl"
+          aria-label="Toggle Dark Mode"
+        >
+          {darkMode ? <FaSun className="" /> : <FaMoon className="" />}
         </button>
 
         {/* Dashboard Button */}
-        <button className="bg-blue-600 text-white py-2 px-4 rounded-full flex items-center hover:bg-blue-700 transition">
+        <Link
+          to="/dashboard"
+          className="bg-[#0078D7] allerta-regular text-white py-2 px-4 rounded-full flex items-center hover:bg-[#0064b6] transition"
+        >
           <span className="mr-2">DASHBOARD</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +84,7 @@ const Navbar = () => {
           >
             <path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.97 0-9 2.16-9 5v1h18v-1c0-2.84-4.03-5-9-5z" />
           </svg>
-        </button>
+        </Link>
       </div>
     </nav>
   );
